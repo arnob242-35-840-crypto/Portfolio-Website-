@@ -1,0 +1,7 @@
+{
+  "name": "Habitat — Interior Design & Furniture Studio",
+  "description": "Habitat is a Copenhagen interior design and furniture studio shaping warm, tactile, architectural homes — from full-home interiors to custom joinery.",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -301,6 +301,48 @@
     });
   }
 
+  /* ---------- Hero interactive parallax ---------- */
+  function initHeroParallax() {
+    if (prefersReduced) return;
+    var hero = document.querySelector(".hero");
+    var feature = document.querySelector(".hero__feature");
+    var copy = document.querySelector(".hero__copy");
+    if (!hero || (!feature && !copy)) return;
+
+    var targetX = 0;
+    var targetY = 0;
+    var currentX = 0;
+    var currentY = 0;
+
+    hero.addEventListener("mousemove", function (e) {
+      var rect = hero.getBoundingClientRect();
+      var x = (e.clientX - rect.left) / rect.width - 0.5;
+      var y = (e.clientY - rect.top) / rect.height - 0.5;
+      targetX = x * 16;
+      targetY = y * 16;
+    });
+
+    hero.addEventListener("mouseleave", function () {
+      targetX = 0;
+      targetY = 0;
+    });
+
+    function update() {
+      currentX += (targetX - currentX) * 0.08;
+      currentY += (targetY - currentY) * 0.08;
+
+      if (feature) {
+        feature.style.transform = "translate3d(" + (-currentX * 0.7) + "px, " + (-currentY * 0.7) + "px, 0)";
+      }
+      if (copy) {
+        copy.style.transform = "translate3d(" + (currentX * 0.35) + "px, " + (currentY * 0.35) + "px, 0)";
+      }
+
+      requestAnimationFrame(update);
+    }
+    update();
+  }
+
   /* ---------- Boot ---------- */
   function boot() {
     initHeader();
@@ -312,6 +354,7 @@
     initReveal();
     initContactForm();
     initNewsletter();
+    initHeroParallax();
   }
 
   if (document.readyState === "loading") {
